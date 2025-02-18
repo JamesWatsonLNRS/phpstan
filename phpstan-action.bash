@@ -32,6 +32,7 @@ then
 	fi
 
 	echo "Using Composer version of PHPStan at $ACTION_PHPSTAN_PATH"
+	VENDOR_BIN=$(composer config bin-dir 2>/dev/null || '')
 fi
 
 if [ -z "$ACTION_PHPSTAN_PATH" ]
@@ -130,7 +131,7 @@ echo "========"
 
 docker run --rm \
 	--volume "$phar_path":/usr/local/bin/phpstan \
-	--volume "${GITHUB_WORKSPACE}/vendor/phpstan:/usr/local/phpstan" \
+	--volume "${GITHUB_WORKSPACE}/${VENDOR_BIN}/phpstan:/usr/local/phpstan" \
 	--volume "${GITHUB_WORKSPACE}":/app \
 	--workdir /app \
 	--env-file ./DOCKER_ENV \
