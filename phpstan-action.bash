@@ -130,6 +130,7 @@ echo "========"
 
 docker run --rm \
 	--volume "$phar_path":/usr/local/bin/phpstan \
+	--volume "${GITHUB_WORKSPACE}/vendor/phpstan:/usr/local/phpstan" \
 	--volume "${GITHUB_WORKSPACE}":/app \
 	--workdir /app \
 	--env-file ./DOCKER_ENV \
