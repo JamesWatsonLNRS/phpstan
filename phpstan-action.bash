@@ -3,6 +3,7 @@ set -e
 github_action_path=$(dirname "$0")
 docker_tag=$(cat ./docker_tag)
 echo "Docker tag: $docker_tag" >> output.log 2>&1
+command_string=("phpstan")
 
 if [ "$ACTION_VERSION" = "composer" ]
 then
@@ -19,6 +20,7 @@ then
 		composer_bin_dir=$(composer config bin-dir 2>/dev/null || '')
 		phpstan_bin="$composer_bin_dir/phpstan"
 
+		echo "Testing $phpstan_bin for Composer version of PHPStan"
 		# Test our fallback Composer path
 		if test -f "$phpstan_bin"
 		then
@@ -28,6 +30,8 @@ then
 			exit 1
 		fi
 	fi
+
+	echo "Using Composer version of PHPStan at $ACTION_PHPSTAN_PATH"
 fi
 
 if [ -z "$ACTION_PHPSTAN_PATH" ]
@@ -37,14 +41,13 @@ then
 	curl --silent -H "User-agent: cURL (https://github.com/php-actions)" -L "$phar_url" > "$phar_path"
 else
 	phar_path="${GITHUB_WORKSPACE}/$ACTION_PHPSTAN_PATH"
+	command_string=("$ACTION_PHPCS_PATH")
 fi
 
 if [ ! -x "$phar_path" ];
 then
 	chmod +x "$phar_path"
 fi
-
-command_string=("phpstan")
 
 if [ -n "$ACTION_COMMAND" ]
 then
