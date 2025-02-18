@@ -125,9 +125,11 @@ done <<<$(env)
 
 echo "Command: " "${command_string[@]}" >> output.log 2>&1
 
+echo "$phar_path"
+echo "========"
+
 docker run --rm \
 	--volume "$phar_path":/usr/local/bin/phpstan \
-	--volume "${GITHUB_WORKSPACE}/vendor/phpstan:/usr/local/phpstan" \
 	--volume "${GITHUB_WORKSPACE}":/app \
 	--workdir /app \
 	--env-file ./DOCKER_ENV \
