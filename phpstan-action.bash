@@ -27,6 +27,7 @@ then
 			ACTION_PHPSTAN_PATH="$phpstan_bin"
 		else
 			echo "Trying to use version installed by Composer, but there is no file at $phpstan_bin"
+			echo "Tested ${GITHUB_WORKSPACE}/$phpstan_bin"
 			exit 1
 		fi
 	fi
