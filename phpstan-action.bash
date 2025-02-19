@@ -17,8 +17,8 @@ then
 	if ! test -f "$ACTION_PHPSTAN_PATH"
 	then
 		echo "No file found at $ACTION_PHPSTAN_PATH, looking in composer bin-dir"
-		composer_bin_dir=$(composer config bin-dir 2>/dev/null || '')
-		phpstan_bin="$composer_bin_dir/phpstan.phar"
+		VENDOR_BIN=$(composer config bin-dir 2>/dev/null || '')
+		phpstan_bin="$VENDOR_BIN/phpstan.phar"
 
 		echo "Testing $phpstan_bin for Composer version of PHPStan"
 		# Test our fallback Composer path
@@ -33,7 +33,6 @@ then
 	fi
 
 	echo "Using Composer version of PHPStan at $ACTION_PHPSTAN_PATH";
-	VENDOR_BIN=$(composer config bin-dir 2>/dev/null || '');
 fi
 
 if [ -z "$ACTION_PHPSTAN_PATH" ]
