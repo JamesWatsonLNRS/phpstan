@@ -47,7 +47,7 @@ fi
 
 if [ ! -x "$phar_path" ];
 then
-	chmod +x "$phar_path"
+	chmod +xr "$phar_path"
 fi
 
 if [ -n "$ACTION_COMMAND" ]
