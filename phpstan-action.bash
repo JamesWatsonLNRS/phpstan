@@ -22,7 +22,7 @@ then
 
 		echo "Testing $phpstan_bin for Composer version of PHPStan"
 		# Test our fallback Composer path
-		if test -f "$phpstan_bin"
+		if test -f "${GITHUB_WORKSPACE}/$phpstan_bin"
 		then
 			ACTION_PHPSTAN_PATH="$phpstan_bin"
 		else
