@@ -18,7 +18,7 @@ then
 	then
 		echo "No file found at $ACTION_PHPSTAN_PATH, looking in composer bin-dir"
 		composer_bin_dir=$(composer config bin-dir 2>/dev/null || '')
-		phpstan_bin="$composer_bin_dir/phpstan"
+		phpstan_bin="$composer_bin_dir/phpstan.phar"
 
 		echo "Testing $phpstan_bin for Composer version of PHPStan"
 		# Test our fallback Composer path
